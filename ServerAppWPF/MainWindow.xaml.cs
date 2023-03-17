@@ -1,21 +1,35 @@
-﻿using ServerApp.Networking;
-using ServerApp.Networking.IO;
-using System.Net;
+﻿using ServerAppWPF.Networking;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
-namespace ServerApp
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace ServerAppWPF
 {
-    class Program
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
         static List<Client> _users;
         static TcpListener _listener;
-        static Socket socketForServer;
-        static TcpClient _tcpClient;
-        private static Thread th_RunServer;
-        static void Main(string[] args)
+        public MainWindow()
         {
+            InitializeComponent();
             StartListen();
         }
-
         private static void StartListen()
         {
             var port = 11111;
@@ -30,9 +44,8 @@ namespace ServerApp
                     var client = new Client(_listener.AcceptTcpClient());
                     _users.Add(client);
                 }
-                
+
             }
         }
-
     }
 }

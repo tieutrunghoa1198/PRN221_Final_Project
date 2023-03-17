@@ -1,30 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerApp.Networking.IO
+namespace PRN221_Final_client.Networking.IO
 {
     class PacketReader : BinaryReader
     {
         private NetworkStream _ns;
         public PacketReader(NetworkStream ns) : base(ns)
-        { 
-            _ns = ns;
-        }
-        public System.Drawing.Image byteArrayToImage()
         {
-            byte[] msgBuffer;
-            var length = ReadInt32();
-            msgBuffer = new byte[length];
-            _ns.Read(msgBuffer, 0, length);
-            MemoryStream ms = new MemoryStream(msgBuffer);
-            System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
-            returnImage.Save("G:\\" + "file_transfered.png");
-            Console.Write(returnImage.ToString());
-            return returnImage;
+            _ns = ns;
         }
         public string readMessage()
         {

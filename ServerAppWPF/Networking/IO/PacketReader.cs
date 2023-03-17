@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace ServerApp.Networking.IO
+using System.IO;
+
+namespace ServerAppWPF.Networking.IO
 {
     class PacketReader : BinaryReader
     {
@@ -14,17 +13,19 @@ namespace ServerApp.Networking.IO
         { 
             _ns = ns;
         }
-        public System.Drawing.Image byteArrayToImage()
+        public void byteArrayToImage()
         {
+            Console.WriteLine("asd 11112");
             byte[] msgBuffer;
             var length = ReadInt32();
             msgBuffer = new byte[length];
+            Console.WriteLine(length.ToString());
             _ns.Read(msgBuffer, 0, length);
-            MemoryStream ms = new MemoryStream(msgBuffer);
-            System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
-            returnImage.Save("G:\\" + "file_transfered.png");
-            Console.Write(returnImage.ToString());
-            return returnImage;
+            BinaryWriter writer = new BinaryWriter(File.Open("asd.jpeg", FileMode.Create));
+            Console.WriteLine("receive message");
+            writer.Write(msgBuffer);
+            writer.Flush();
+            writer.Close();
         }
         public string readMessage()
         {

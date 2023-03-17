@@ -1,4 +1,4 @@
-﻿using ServerApp.Networking.IO;
+﻿using ServerAppWPF.Networking.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,8 @@ using System.Net.Sockets;
 using System.Drawing.Imaging;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
-
-namespace ServerApp.Networking
+using System.Threading.Tasks;
+namespace ServerAppWPF.Networking
 {
     class Client
     {
@@ -62,8 +62,9 @@ namespace ServerApp.Networking
                             //Program.broadCastMessage($"[{DateTime.Now}] : [{username}] : {msg}");
                             break;
                         case 4:
+                            Console.WriteLine("asd");
                             _packetReader.byteArrayToImage();
-                            Console.WriteLine();
+                            
                             break;
                         default:
                             break;
